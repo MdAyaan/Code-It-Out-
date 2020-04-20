@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define fio() ios_base::sync_with_stdio(false);\
+cin.tie(NULL);
+ 
+#define md 1000000007
+typedef long long int lli;
+typedef float fl;
+#define mem(arr,x) memset(arr,x,sizeof(arr))
+
+ 
+int main()
+{    
+    fio();
+    lli   t,c=1;
+    cin>>t;
+    while(t--)
+    {
+           lli n,m,i,j,k,l,z,ans=0;
+           cin>>n;       
+           lli ar[n],g;
+           lli no=1;
+           for(i=0;i<n;i++)	cin>>ar[i];
+           sort(ar,ar+n);
+	   	     ans=ar[0]*ar[n-1];
+		       lli count=0;
+	         vector<lli> temp;
+	       
+		for(i=1;i<=sqrt(ans);i++)
+		{
+			if(ans%i==0)
+			{
+				temp.push_back(i);
+				if(ans/i!=i)
+				{
+					temp.push_back(ans/i);
+				}
+			}
+		}
+		sort(temp.begin(),temp.end());
+
+		for(i=0;i<n;i++)
+		{
+			if(ar[i]!=temp[i+1])
+			{
+				count++;
+				break;
+			}
+		}
+		if(count==0)
+		cout<<ans<<endl;
+		else
+		cout<<-1<<endl;
+    } 
+   
+}
