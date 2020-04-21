@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define fio() ios_base::sync_with_stdio(false);\
+cin.tie(NULL);
+ 
+#define md 1000000007
+typedef long long int lli;
+typedef float fl;
+#define mem(arr,x) memset(arr,x,sizeof(arr))
+
+int main()
+{    
+    fio();
+    lli n;
+    cin>>n;
+    vector <char> s;
+    lli t,i,j,k,l,m;
+    for(i=0;i<n;i++)
+    	{
+    		cin>>t;
+    		if(t==1) s.push_back('(');
+    		else s.push_back(')');
+		}
+
+	lli nes_depth=0,fir_position=0,len_maxseq=0,fir_pos_maxseq;
+	stack <lli> pos;
+	 
+	for(i=0;i<n;i++)
+	{
+		if( s[i]=='(' )
+		{
+			pos.push(i+1);
+			if(pos.size()>nes_depth)
+			{
+				nes_depth=pos.size();
+				fir_position=i+1;
+			}				
+		}
+		else
+		{
+			l=i+1-pos.top()+1;
+			if(l>len_maxseq)
+			{
+				len_maxseq=l;
+				fir_pos_maxseq=pos.top();
+			}
+			pos.pop();
+		}
+	}
+		
+	cout<<nes_depth<<" "<<fir_position<<" "<<len_maxseq<<" "<<fir_pos_maxseq<<"\n";
+}
