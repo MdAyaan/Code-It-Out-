@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define fio() ios_base::sync_with_stdio(false);\
+cin.tie(NULL);
+ 
+#define md 1000000007
+typedef long long int lli;
+typedef float fl;
+#define mem(arr,x) memset(arr,x,sizeof(arr))
+
+typedef struct tim
+            {
+               lli a; 
+               lli val;
+            }item;
+
+
+lli comparator(item p,item q) 
+{ 
+    return (   p.val < q.val ) ; 
+} 
+ 
+
+int main()
+{    
+    fio();
+   
+    	lli i,j,k=0,l,m,n,w,z;
+		cin>>n>>w;
+		item ar[n+1];
+		for(i=1;i<=n;i++)
+			cin>>ar[i].a>>ar[i].val;
+		
+		lli d[n+1][w+1];
+		mem(d,0);
+		
+    	for(i=0;i<=n;i++)
+    	{
+    		for(j=0;j<=w;j++)
+    		{
+    			z=0;
+    			if(i==0 || j==0) d[i][j]=0;
+    			else if (ar[i].a<=j) 
+               { z=j-ar[i].a; d[i][j] = max( ar[i].val+d[i-1][z],  d[i-1][j] ); }
+          		else d[i][j] = d[i-1][j];  
+			  }
+		}
+		cout<<d[n][w];
+}
