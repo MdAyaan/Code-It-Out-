@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define fio() ios_base::sync_with_stdio(false);\
+cin.tie(NULL);
+ 
+#define md 1e9 + 7
+typedef long long int lli;
+typedef float fl;
+#define mem(arr,x) memset(arr,x,sizeof(arr))
+
+int main()
+{    
+    fio();
+   
+    	lli i,j,k=0,l,m=0,n,w,z=0;
+		string s;
+		cin>>s;
+		cin>>n;
+		lli candy=0,snowflake=0;
+		vector<char> ans;
+		for(i=0;i<s.length();i++)
+		{
+			if(s[i]=='?') candy++;
+			else if(s[i]=='*')
+			{	 if(i==0) m=1; snowflake++; }
+		}
+		l=s.length();
+		l=l-candy-snowflake;
+		if(l>n)
+		{
+			if(l-candy-snowflake<=n) k=1;
+			else cout<<"Impossible";
+			lli count=l;
+			if(k)
+			for(i=0;i<s.length() ;i++)
+			{
+				if(s[i]=='*' || s[i]=='?') continue;
+				if(s[i+1]=='?' && count>n)
+					count--;
+				else if(s[i+1]=='*' && count>n)
+					count--;
+				else ans.push_back(s[i]);
+			}
+		}
+		else if(l<n)
+		{
+			if(snowflake==1 && m==1) cout<<"Impossible";
+			else if(snowflake==0) cout<<"Impossible";
+			else if(snowflake) k=1;
+			lli count=l;
+			if(k)
+			for(i=0;i<s.length() ;i++)
+			{
+				if(s[i]=='*' || s[i]=='?') continue;
+				if(s[i+1]=='*')
+					{
+						ans.push_back(s[i]);
+						while(count<n)
+						{
+							ans.push_back(s[i]);
+							count++;
+						}
+					}
+				else ans.push_back(s[i]);
+			} 
+		}
+		if(l==n)
+		{
+			for(i=0;i<s.length();i++)
+				if(s[i]=='?' || s[i]=='*') continue;
+				else cout<<s[i];
+			k=0;
+		}
+		
+		if(k)
+		{
+			for(i=0;i<n;i++)	cout<<ans[i];
+		}
+}
